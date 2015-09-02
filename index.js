@@ -9,6 +9,7 @@ let nodeifyit = require('nodeifyit')
 let bcrypt = require('bcrypt')
 let flash = require('connect-flash') // flash messages
 let mongoose = require('mongoose') //mongo db
+let User = require('./user')
 
 require('songbird')
 
@@ -87,7 +88,7 @@ passport.use('local-signup', new LocalStrategy({
 
 passport.serializeUser(nodeifyit(async (user) => user.email))
 passport.deserializeUser(nodeifyit(async (email) => {
-	return await User.findOne({email}.exec())
+	return await User.findOne({email}).exec()
 }))
 
 app.post('/login', passport.authenticate('local', {
