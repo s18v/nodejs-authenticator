@@ -10,7 +10,6 @@ let bcrypt = require('bcrypt')
 let flash = require('connect-flash') // flash messages
 let mongoose = require('mongoose') //mongo db
 let User = require('./user')
-
 require('songbird')
 
 const NODE_ENV = process.env.NODE_ENV || 'dev'
@@ -23,6 +22,9 @@ let app = express()
 app.set('view engine', 'ejs')
 
 app.use(flash())
+
+// logging
+app.use(morgan('dev'))
 
 // Read cookies, required for sessions
 app.use(cookieParser('ilovethenodejs'))
